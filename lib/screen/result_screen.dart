@@ -74,8 +74,9 @@ class ResultScreen extends StatelessWidget {
 
                           child: Text(
                             '${data['user_answer']}',
-                            style: const TextStyle(
-                              color: Colors.red,
+                            style: TextStyle(
+                              color:(data['user_answer'] != data['correct_answer'])?
+                              Colors.red:Colors.blue,
                               //overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -93,7 +94,7 @@ class ResultScreen extends StatelessWidget {
                                 child: Text(
                                   '${data['correct_answer']}',
                                   style: const TextStyle(
-                                    color: Colors.blueAccent,
+                                    color: Colors.blue,
                                   ),
                                 ),
                               ),
