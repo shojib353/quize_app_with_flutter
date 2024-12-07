@@ -50,7 +50,8 @@ class ResultScreen extends StatelessWidget {
                     final data = summaryData[index];
                     return ListTile(
                       leading: CircleAvatar(
-                        backgroundColor: Colors.purpleAccent,
+                        backgroundColor: (data['user_answer'] == data['correct_answer'])?
+                        Colors.green:Colors.red,
                         foregroundColor: Colors.white,
                         radius: 40,
 
@@ -64,22 +65,44 @@ class ResultScreen extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.bold,
                         color: Colors.white),
                       ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Correct Answer: ${data['correct_answer']}',style:
-                            const TextStyle(
-                              color: Colors.purpleAccent
-                            ),),
-                          Text('Your Answer: ${data['user_answer']}'
-                            ,style:
-                            TextStyle(
-                                color: (data['user_answer'] == data['correct_answer'])
-                                    ? Colors.orangeAccent // Green if the user's answer is correct
-                                    : Colors.red,
-                            ),),
-                        ],
-                      ),
+                      subtitle: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+
+
+                        Flexible(
+
+                          child: Text(
+                            '${data['user_answer']}',
+                            style: const TextStyle(
+                              color: Colors.red,
+                              //overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 5,),
+
+                        Flexible(
+                          child:(data['user_answer'] != data['correct_answer'])
+                              ? Row(
+                            children: [
+                              Icon(Icons.check_box, color: Colors.green), // Add the icon
+                              const SizedBox(width: 1), // Add spacing between the icon and text
+                              Expanded(
+
+                                child: Text(
+                                  '${data['correct_answer']}',
+                                  style: const TextStyle(
+                                    color: Colors.blueAccent,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ) :SizedBox(width: 5,),
+                        ),
+                      ],
+                    ),
+
                     );
                   },
                 ),
